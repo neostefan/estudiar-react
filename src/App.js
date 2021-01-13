@@ -5,6 +5,8 @@ import Nav from './components/nav';
 import Footer from './components/footer';
 
 import Home from './pages/home';
+import Login from './pages/login';
+import Register from './pages/register';
 
 function App() {
   return (
@@ -13,6 +15,8 @@ function App() {
         <Router>
           <Nav/>
           <Switch>
+            <Route path="/register"><Register/></Route>
+            <Route path="/login"><Login/></Route>
             <Route path="/"><Home/></Route>
           </Switch>
         </Router>

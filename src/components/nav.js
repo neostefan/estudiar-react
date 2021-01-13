@@ -26,7 +26,7 @@ const Navigation = () => {
     return (
         <Styles>
             <Navbar expand="lg">
-            <Navbar.Brand><img alt="logo" src={brandImg}/></Navbar.Brand>
+            <Navbar.Brand to="/" as={Link}><img alt="logo" src={brandImg}/></Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-nav"/>
                 <Navbar.Collapse id="basic-nav">
                     <Nav className="ml-auto">
