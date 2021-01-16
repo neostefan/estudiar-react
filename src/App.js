@@ -10,6 +10,7 @@ import Register from './pages/register';
 import Upload from './pages/upload';
 import Courses from './pages/courses';
 import Materials from './pages/materials';
+import Profile from './pages/profile';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Router>
           <Nav/>
           <Switch>
+            <Route path="/d"><Profile/></Route>
             <Route path="/materials"><Materials/></Route>
             <Route path="/courses"><Courses/></Route>
             <Route path="/register"><Register/></Route>

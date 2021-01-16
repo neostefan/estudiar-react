@@ -3,7 +3,8 @@ import Styled from 'styled-components';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 
-import Button from '../components/button'; 
+import Button from '../components/button';
+import {engineering_depts, science_depts, faculties, years} from '../util/gen-util'; 
 
 const Styles = Styled.div`
     display: grid;
@@ -43,29 +44,7 @@ const Upload = () => {
         material: null
     });
 
-    let options_faculty = [
-        "Engineering",
-        "Science"
-    ];
-
     let checkFaculty = () => {
-        let engineering_depts = [
-            "Systems",
-            "Electrical",
-            "Mechanical",
-            "Chemical",
-            "Petrochemical",
-            "Biomedical",
-            "Surveying"
-        ];
-
-        let science_depts = [
-            "Geology",
-            "Pharmacy",
-            "Marine Biology",
-            "Zoology"
-        ]
-
         if(state.faculty === "Engineering") {
             return engineering_depts.map(dept => (
                 <option value={dept}>{dept}</option>
@@ -95,7 +74,7 @@ const Upload = () => {
                                 name="faculty"
                                 onChange={handleChange}
                             >
-                                {options_faculty.map(fac => (
+                                {faculties.map(fac => (
                                     <option value={fac}>{fac}</option>
                                 ))}
                             </Form.Control>
@@ -121,11 +100,9 @@ const Upload = () => {
                         name="year"
                         onChange={handleChange}
                     >
-                        <option value={1}>1</option>
-                        <option value={2}>2</option>
-                        <option value={3}>3</option>
-                        <option value={4}>4</option>
-                        <option value={5}>5</option>
+                        {years.map(yr => (
+                            <option value={yr}>{yr}</option>
+                        ))}
                     </Form.Control>
                 </Form.Group>
                 <Form.Group>

@@ -1,5 +1,6 @@
 import React from 'react';
 import Styled from 'styled-components';
+import file from '../assets/file.png';
 
 const Styles = Styled.div`
     display: flex;
@@ -37,7 +38,7 @@ const Materials = () => {
         <Styles>
             {testMaterials.map(mat => (
                 <div className="mat-container">
-                    <img alt="img"/>
+                    <img alt="img" src={file}/>
                     <div className="name">{mat}</div>
                 </div>
             ))}
