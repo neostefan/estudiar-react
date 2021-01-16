@@ -4,6 +4,7 @@ import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
 import Button from '../components/button';
 import img from '../assets/bg-jumbo.jpg';
+import {engineering_depts, science_depts, faculties, years} from '../util/gen-util';
 
 const Styles = Styled.div`
     display: grid;
@@ -66,31 +67,9 @@ const Register = () => {
         year: 1
     });
 
-    let options_faculty = [
-        "Engineering",
-        "Science"
-    ];
-
     let handleChange = e => dispatch({type: "INPUT_CHANGE", input: e.target.name, value: e.target.value});
 
     let checkFaculty = () => {
-        let engineering_depts = [
-            "Systems",
-            "Electrical",
-            "Mechanical",
-            "Chemical",
-            "Petrochemical",
-            "Biomedical",
-            "Surveying"
-        ];
-
-        let science_depts = [
-            "Geology",
-            "Pharmacy",
-            "Marine Biology",
-            "Zoology"
-        ]
-
         if(state.faculty === "Engineering") {
             return engineering_depts.map(dept => (
                 <option value={dept}>{dept}</option>
@@ -142,7 +121,7 @@ const Register = () => {
                                     name="faculty"
                                     onChange={handleChange}
                                     >
-                                    {options_faculty.map(opt => (
+                                    {faculties.map(opt => (
                                         <option value={opt}>{opt}</option>
                                     ))}
                                 </Form.Control>
@@ -164,11 +143,9 @@ const Register = () => {
                                     name="year"
                                     onChange={handleChange}
                                 >
-                                    <option value={1}>1</option>
-                                    <option value={2}>2</option>
-                                    <option value={3}>3</option>
-                                    <option value={4}>4</option>
-                                    <option value={5}>5</option>
+                                    {years.map(yr => (
+                                        <option value={yr}>{yr}</option>
+                                    ))}
                                 </Form.Control>
                             </Form.Group>
                             <Button
