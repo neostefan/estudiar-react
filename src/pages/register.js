@@ -4,7 +4,14 @@ import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
 import Button from '../components/button';
 import img from '../assets/bg-jumbo.jpg';
-import {engineering_depts, science_depts, faculties, years} from '../util/gen-util';
+import {
+    engineering_depts, 
+    science_depts, 
+    faculties, 
+    years,
+    checkErrorItem
+} from '../util/gen-util';
+import {emailSanitization, passwordSanitization} from '../util/sanitize-util';
 
 const Styles = Styled.div`
     display: grid;
@@ -53,6 +60,23 @@ const Reducer = (state, action) => {
                 ...state,
                 [action.input]: action.value
             }
+        case "ERROR_OCCURRED":
+            return {
+                ...state,
+                errors: [...state.errors, {type: action.errType, msg: action.msg}]
+            }
+        case "ERROR_RESOLVED":
+            return {
+                ...state,
+                errors: state.errors.map(item => ((item.type === action.errType) ? {type: '', msg: ''} : item))
+            }
+        case "RESET":
+            return {
+                ...state,
+                email: '',
+                password: '',
+                errors: []
+            }
         default: return state
     }
 }
@@ -64,27 +88,68 @@ const Register = () => {
         password: "",
         faculty: "Engineering",
         dept: "",
-        year: 1
+        year: 1,
+        errors: []
     });
 
-    let handleChange = e => dispatch({type: "INPUT_CHANGE", input: e.target.name, value: e.target.value});
+    let handleChange = e => {
+        dispatch({type: "INPUT_CHANGE", input: e.target.name, value: e.target.value});
+
+        if(e.target.name === "email") {
+            let output = emailSanitization(e.target.value);
+            if(output.status) {
+                let errType = "email";
+                dispatch({type: "ERROR_RESOLVED", errType});
+            } else {
+                dispatch({type: "ERROR_OCCURRED", msg: output.msg, errType: 'email'});
+            }
+        }
+        
+        if(e.target.name === "password") {
+            let status = passwordSanitization(e.target.value);
+            if(status) {
+                let errType = "password";
+                dispatch({type: "ERROR_RESOLVED", errType});
+            } else {
+                let msg = "password min length is 7 and must contain numbers";
+                dispatch({type: "ERROR_OCCURRED", msg, errType: 'password'});   
+            }
+        }
+    }
 
     let checkFaculty = () => {
         if(state.faculty === "Engineering") {
             return engineering_depts.map(dept => (
-                <option value={dept}>{dept}</option>
+                <option key={dept} value={dept}>{dept}</option>
             ))
         }
 
         if(state.faculty === "Science") {
             return science_depts.map(dept => (
-                <option value={dept}>{dept}</option>
+                <option key={dept} value={dept}>{dept}</option>
             ))
         }
     }
 
-    let handleSubmit = () => {
+    let checkForErrors = type => {
+        if(state.errors.length > 0) {
+            console.log(state.errors);
+            let error = checkErrorItem(state.errors, type);
+            if(error !== undefined) {
+                return error.msg;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+        
+    }
 
+    let handleSubmit = e => {
+        e.preventDefault();
+        console.log("submitting");
+        dispatch({type: "RESET"});
     }
 
     return (
@@ -93,7 +158,7 @@ const Register = () => {
             <div className="register">
                 <Card>
                     <Card.Body>
-                        <Form>
+                        <Form onSubmit={handleSubmit}>
                             <Form.Group>
                                 <Form.Label>E-mail</Form.Label>
                                 <Form.Control
@@ -103,6 +168,11 @@ const Register = () => {
                                     value={state.email}
                                     onChange={handleChange}
                                     />
+                                {checkForErrors('email') ? 
+                                    <Form.Text style={{color: "red"}}>
+                                        {checkForErrors('email')}
+                                    </Form.Text> : null
+                                }
                             </Form.Group>
                             <Form.Group>
                                 <Form.Label>Password</Form.Label>
@@ -113,6 +183,11 @@ const Register = () => {
                                     value={state.password}
                                     onChange={handleChange}
                                     />
+                                {checkForErrors('password') ? 
+                                    <Form.Text style={{color: "red"}}>
+                                        {checkForErrors('password')}
+                                    </Form.Text> : null
+                                }
                             </Form.Group>
                             <Form.Group>
                                 <Form.Label>Faculty</Form.Label>
@@ -122,7 +197,7 @@ const Register = () => {
                                     onChange={handleChange}
                                     >
                                     {faculties.map(opt => (
-                                        <option value={opt}>{opt}</option>
+                                        <option key={opt} value={opt}>{opt}</option>
                                     ))}
                                 </Form.Control>
                             </Form.Group>
@@ -144,14 +219,12 @@ const Register = () => {
                                     onChange={handleChange}
                                 >
                                     {years.map(yr => (
-                                        <option value={yr}>{yr}</option>
+                                        <option key={yr} value={yr}>{yr}</option>
                                     ))}
                                 </Form.Control>
                             </Form.Group>
                             <Button
-                            className="cBtn" 
-                            text="Register" 
-                            click={() => handleSubmit()} 
+                            text="Register"  
                             type="submit"/>
                         </Form>
                     </Card.Body>
