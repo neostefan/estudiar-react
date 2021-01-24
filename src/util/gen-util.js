@@ -28,9 +28,18 @@ const years = [
     5
 ]
 
+const checkErrorItem = (arr, type) => {
+    if(arr.length > 0) {
+        return arr.find(item => (item.type === type));
+    } else {
+        return undefined;
+    }
+}
+
 export {
     engineering_depts,
     science_depts,
     faculties,
-    years
+    years,
+    checkErrorItem
 }

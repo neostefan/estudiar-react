@@ -62,9 +62,12 @@ const Upload = () => {
 
     let handleChange = e => dispatch({type: "INPUT_CHANGE", input: e.target.name, value: e.target.value});
 
+    let handleSubmit = e => {
+        e.preventDefault();
+    }
     return (
         <Styles>
-            <Form>
+            <Form onSubmit={handleSubmit}>
                 <Form.Row>
                     <Col>
                         <Form.Group>
