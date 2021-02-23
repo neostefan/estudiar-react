@@ -176,8 +176,7 @@ const LogIn = () => {
             console.log(res.data);
         } catch(e) {
             let msg = checkServerErrorType(e);
-            console.log(msg);
-            dispatch({type: "SUBMITTED", msgType: 'err', msg: 'something went wrong!' });
+            dispatch({type: "SUBMITTED", msgType: 'err', msg: msg });
         }
         dispatch({type: "RESET"});
     }

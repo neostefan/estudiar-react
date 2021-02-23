@@ -111,7 +111,6 @@ const Profile = () => {
 
     let submitHandler = e => {
         e.preventDefault();
-        console.log("Submitting...");
         dispatch({type: "DISABLE_EDITING"});
     }
 

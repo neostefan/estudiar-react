@@ -144,15 +144,23 @@ const Register = () => {
 
     let checkFaculty = () => {
         if(state.faculty === "Engineering") {
-            return engineering_depts.map(dept => (
-                <option key={dept} value={dept}>{dept}</option>
-            ))
+            return engineering_depts.map((dept, i) => {
+                if(i === 0) {
+                    return (<option key={dept} value={dept} selected>{dept}</option>)
+                }
+                
+                return (<option key={dept} value={dept}>{dept}</option>);
+            });
         }
 
         if(state.faculty === "Science") {
-            return science_depts.map(dept => (
-                <option key={dept} value={dept}>{dept}</option>
-            ))
+            return science_depts.map((dept, i) => {
+                if(i === 0) {
+                    return (<option key={dept} value={dept} selected>{dept}</option>)
+                }
+                
+                return (<option key={dept} value={dept}>{dept}</option>);
+            });
         }
     }
 

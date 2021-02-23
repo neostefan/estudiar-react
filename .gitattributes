@@ -1,0 +1,14 @@
+# default setting for line endings if the default is not specified in an os
+# text attribute enables and controls line ending normalization
+*     text=auto
+
+# for files that must have their eol(end of line) set to lf(linux line ending) on checkout
+* .md text eol=lf
+* .json text eol=lf
+* .txt text eol=lf
+* .js text eol=lf
+* .ico text eol=lf 
+
+# for binary
+* .jpg binary
+* .png binary

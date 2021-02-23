@@ -3,7 +3,7 @@ const checkServerErrorType = err => {
         if(err.response.data) {
             console.log(err.message);
             console.log(err.response.data);
-            return err.response.data;
+            return err.response.data.msg;
         } else {
             console.log(err.message);
             return err.message;
