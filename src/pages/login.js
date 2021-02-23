@@ -1,12 +1,17 @@
 import React from 'react';
 import Styled from 'styled-components';
+import {useHistory} from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
-import Button from '../components/button';
-import img from '../assets/bg-jumbo.jpg';
+import Alert from 'react-bootstrap/Alert';
 
+import Button from '../components/button';
+import axios from '../axios-inst';
+import img from '../assets/bg-jumbo.jpg';
+import authContext from '../context/auth-context';
 import {emailSanitization, passwordSanitization} from '../util/sanitize-util';
 import {checkErrorItem} from '../util/gen-util';
+import {checkServerErrorType} from '../util/err-util';
 
 const Styles = Styled.div`
     display: grid;
@@ -64,6 +69,24 @@ const Reducer = (state, action) => {
                 ...state,
                 errors: state.errors.map(item => ((item.type === action.errType) ? {type: '', msg: ''} : item))
             }
+        case "SUBMITTING":
+            return {
+                ...state,
+                loading: true
+            }
+        case "SUBMITTED":
+            return {
+                ...state,
+                loading: false,
+                msg: action.msg,
+                show: true,
+                msgType: action.msgType
+            }
+        case "MSG_SEEN":
+            return {
+                ...state,
+                show: false
+            }
         case "RESET":
             return {
                 ...state,
@@ -76,7 +99,19 @@ const Reducer = (state, action) => {
 }
 
 const LogIn = () => {
-    let [state, dispatch] = React.useReducer(Reducer, {email: "", password: "", errors: []});
+    let {setAuth} = React.useContext(authContext);
+
+    let [state, dispatch] = React.useReducer(Reducer, {
+        email: "", 
+        password: "", 
+        errors: [],
+        msg: '',
+        msgType: '',
+        loading: false,
+        show: false
+    });
+
+    let history = useHistory();
 
     let handleChange = e => {
         dispatch({type: "INPUT_CHANGE", input: e.target.name, value: e.target.value});
@@ -117,8 +152,32 @@ const LogIn = () => {
         
     }
     
-    let handleSubmit = e => {
+    let handleSubmit = async e => {
         e.preventDefault();
+        try {
+            let fd = new FormData();
+            fd.append('email', state.email);
+            fd.append('password', state.password);
+            let res = await axios.post('/auth/login', fd);
+            if(res.data.msg) {
+                dispatch({type: "SUBMITTED", msgType: 'err', msg: res.data.msg});
+            } else {
+                let token = res.data.token;
+                let duration = res.data.exp * 1000;
+                let expiresIn = new Date().getTime() + duration;
+                localStorage.setItem('token', token);
+                localStorage.setItem('expires', expiresIn);
+                setTimeout(() => {
+                    setAuth(false);
+                }, duration);
+                setAuth(true);
+                history.push('/d');
+            }
+            console.log(res.data);
+        } catch(e) {
+            let msg = checkServerErrorType(e);
+            dispatch({type: "SUBMITTED", msgType: 'err', msg: msg });
+        }
         dispatch({type: "RESET"});
     }
 
@@ -128,6 +187,16 @@ const LogIn = () => {
             <div className="login">
                 <Card>
                     <Card.Body>
+                        {(state.msgType !== '') ? 
+                            <Alert
+                                show={state.show}
+                                variant={(state.msgType !== 'err') ? 'success' : 'danger'}
+                                onClose={() => dispatch({type: "MSG_SEEN"})}
+                                dismissible
+                            >
+                                {state.msg}
+                            </Alert> : null
+                        }
                         <Form onSubmit={handleSubmit}>
                             <Form.Group>
                                 <Form.Label>E-mail</Form.Label>
@@ -160,7 +229,7 @@ const LogIn = () => {
                                 }
                             </Form.Group>
                             <Button 
-                            text="Login" 
+                            text="Sign In" 
                             type="submit"/>
                         </Form>
                     </Card.Body>

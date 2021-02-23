@@ -2,8 +2,11 @@ import React from 'react';
 import Styled from 'styled-components';
 import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
+import Alert from 'react-bootstrap/Alert';
+
 import Button from '../components/button';
 import img from '../assets/bg-jumbo.jpg';
+import axios from '../axios-inst';
 import {
     engineering_depts, 
     science_depts, 
@@ -12,6 +15,7 @@ import {
     checkErrorItem
 } from '../util/gen-util';
 import {emailSanitization, passwordSanitization} from '../util/sanitize-util';
+import {checkServerErrorType} from '../util/err-util';
 
 const Styles = Styled.div`
     display: grid;
@@ -70,6 +74,24 @@ const Reducer = (state, action) => {
                 ...state,
                 errors: state.errors.map(item => ((item.type === action.errType) ? {type: '', msg: ''} : item))
             }
+        case "SUBMITTING":
+            return {
+                ...state,
+                loading: true
+            }
+        case "SUBMITTED":
+            return {
+                ...state,
+                loading: false,
+                msg: action.msg,
+                show: true,
+                msgType: action.msgType
+            }
+        case "MSG_SEEN":
+            return {
+                ...state,
+                show: false
+            }
         case "RESET":
             return {
                 ...state,
@@ -89,7 +111,10 @@ const Register = () => {
         faculty: "Engineering",
         dept: "",
         year: 1,
-        errors: []
+        errors: [],
+        show: false,
+        msg: '',
+        msgType: ''
     });
 
     let handleChange = e => {
@@ -119,15 +144,23 @@ const Register = () => {
 
     let checkFaculty = () => {
         if(state.faculty === "Engineering") {
-            return engineering_depts.map(dept => (
-                <option key={dept} value={dept}>{dept}</option>
-            ))
+            return engineering_depts.map((dept, i) => {
+                if(i === 0) {
+                    return (<option key={dept} value={dept} selected>{dept}</option>)
+                }
+                
+                return (<option key={dept} value={dept}>{dept}</option>);
+            });
         }
 
         if(state.faculty === "Science") {
-            return science_depts.map(dept => (
-                <option key={dept} value={dept}>{dept}</option>
-            ))
+            return science_depts.map((dept, i) => {
+                if(i === 0) {
+                    return (<option key={dept} value={dept} selected>{dept}</option>)
+                }
+                
+                return (<option key={dept} value={dept}>{dept}</option>);
+            });
         }
     }
 
@@ -146,9 +179,23 @@ const Register = () => {
         
     }
 
-    let handleSubmit = e => {
+    let handleSubmit = async e => {
         e.preventDefault();
-        console.log("submitting");
+        dispatch({type: "SUBMITTING"});
+        try {
+            let fd = new FormData();
+            fd.append('email', state.email);
+            fd.append('password', state.password);
+            fd.append('faculty', state.faculty);
+            fd.append('dept', state.dept);
+            fd.append('year', state.year);
+            let res = await axios.post('/auth/register', fd);
+            dispatch({type: "SUBMITTED", msg: res.data, msgType: 'notif'});
+        } catch(e) {
+            let error = checkServerErrorType(e);
+            dispatch({type: "SUBMITTED", msg: error, msgType: 'err'});
+        }
+
         dispatch({type: "RESET"});
     }
 
@@ -158,6 +205,16 @@ const Register = () => {
             <div className="register">
                 <Card>
                     <Card.Body>
+                        {state.msg ? 
+                            <Alert 
+                                show={state.show} 
+                                variant={(state.msgType !== 'err') ? 'success' : 'danger'}
+                                dismissible
+                                onClose={() => dispatch({type: "MSG_SEEN"})}
+                            >
+                                {state.msg}
+                            </Alert> : null
+                        }
                         <Form onSubmit={handleSubmit}>
                             <Form.Group>
                                 <Form.Label>E-mail</Form.Label>
