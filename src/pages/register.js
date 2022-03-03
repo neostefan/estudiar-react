@@ -106,6 +106,7 @@ const Reducer = (state, action) => {
 const Register = () => {
 
     let [state, dispatch] = React.useReducer(Reducer, {
+        name: "",
         email: "",
         password: "",
         faculty: "Engineering",
@@ -184,6 +185,7 @@ const Register = () => {
         dispatch({type: "SUBMITTING"});
         try {
             let fd = new FormData();
+            fd.append('name', state.name)
             fd.append('email', state.email);
             fd.append('password', state.password);
             fd.append('faculty', state.faculty);
@@ -216,6 +218,21 @@ const Register = () => {
                             </Alert> : null
                         }
                         <Form onSubmit={handleSubmit}>
+                        <Form.Group>
+                                <Form.Label>First Name</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    placeholder="Enter your first name"
+                                    name="name"
+                                    value={state.name}
+                                    onChange={handleChange}
+                                    />
+                                {checkForErrors('name') ? 
+                                    <Form.Text style={{color: "red"}}>
+                                        {checkForErrors('name')}
+                                    </Form.Text> : null
+                                }
+                            </Form.Group>
                             <Form.Group>
                                 <Form.Label>E-mail</Form.Label>
                                 <Form.Control
