@@ -1,10 +1,1 @@
-CWD=`pwd`
-
-if [ -e "$CWD/dockerfile" ]
-then
-    npm run build
-    docker image build -t estudiar:react .
-    docker container run -d --name estudiar-web -p 80:80 --network estudiar estudiar:react
-else
-    echo "No dockerfile found for deployment"
-fi
+docker container run -d --name estudiar-web -p 80:80 --network estudiar neostefan/estudiar-web:0.1
