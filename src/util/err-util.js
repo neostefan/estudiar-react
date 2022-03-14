@@ -9,9 +9,9 @@ const checkServerErrorType = err => {
             return err.message;
         }
     } else if(err.request) {
-        return err.request.data;
-    } else {
         return err.message;
+    } else {
+        return 'Technical Server Issues';
     }
 }
 

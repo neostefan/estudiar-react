@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -5,9 +9,81 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  height: 100vh; 
+}
+
+div#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+footer {
+  margin-top: auto;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.center-page-col {
+  min-height: 500px;
+  @apply flex flex-col items-center justify-center;
+}
+
+.dark-btn {
+  @apply bg-purple-500 text-white px-2 py-1 border border-purple-300 border-4 rounded-md cursor-pointer shadow-md
+}
+
+.dark-btn:hover {
+  @apply text-white bg-purple-300 border-purple-300
+}
+
+.light-btn {
+  @apply  bg-gray-200 text-gray-500 px-2 py-1 border border-gray-300 border-4 rounded-md cursor-pointer shadow-md
+}
+
+.light-btn:hover {
+  @apply text-white bg-gray-400
+}
+
+.input {
+  @apply p-2 h-10 border-2 border-gray-300 focus:border-purple-300 focus:outline-none rounded-md shadow-sm
+}
+
+.auth-card {
+  @apply w-auto h-auto border-2 border-gray-300 ring-offset-gray-500 shadow-md rounded-md p-6
+}
+
+.error {
+  @apply whitespace-pre-wrap text-red-400 text-xs
+}
+
+.form-group {
+  @apply w-auto flex flex-col gap-0.5
+}
+
+.alert-success {
+  @apply my-1 flex h-auto p-2 text-xs border-2 rounded-lg border-green-600 text-green-600 bg-green-200
+}
+
+.alert-danger {
+  @apply my-1 flex h-auto p-2 text-xs border-2 rounded-lg border-red-600 text-red-600 bg-red-200
+}
+
+.nav-link-dark {
+  @apply sm:w-14 w-20 mx-1 my-2 text-purple-600 cursor-pointer border-transparent border-b-2 hover:border-yellow-500 hover:text-purple-400 sm:mx-3
+}
+
+.s-nav-link-dark {
+  @apply sm:w-14 w-20 mx-1 my-2 text-purple-600 cursor-pointer border-transparent border-b-2 border-yellow-500 text-purple-400 sm:mx-3
+}
+
+.nav-link-light {
+  @apply sm:w-14 w-20 mx-1 my-2 text-gray-600 cursor-pointer border-transparent border-b-2 hover:border-yellow-500 hover:text-gray-400 sm:mx-3
+}
+
+.s-nav-link-light {
+  @apply sm:w-14 w-20 mx-1 my-2 text-gray-600 cursor-pointer border-transparent border-b-2 border-yellow-500 text-gray-400 sm:mx-3
 }

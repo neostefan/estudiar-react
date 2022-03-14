@@ -1,25 +1,13 @@
-import React from 'react';
-import Styled from 'styled-components';
-
-const Styles = Styled.footer`
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    background-color: #9f9f9f;
-    height: 100px;
-    padding: 10px;
-    color: white;
-`;
+import React from "react";
 
 const Footer = () => {
+  let date = new Date().getFullYear();
 
-    let date = new Date().getFullYear();
-
-    return (
-        <Styles>
-            &copy;Copyright Estudiar {date} 
-        </Styles>
-    );
-}
+  return (
+    <footer className="flex min-w-full p-3 flex-col items-center text-purple-600 bg-indigo-100">
+      &copy;Copyright Estudiar {date}
+    </footer>
+  );
+};
 
 export default Footer;

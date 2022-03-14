@@ -1,173 +1,65 @@
-import React from 'react';
-import Styled from 'styled-components';
-import Jumbo from 'react-bootstrap/Jumbotron';
-import Container from 'react-bootstrap/Container';
-import Card from 'react-bootstrap/Card';
-import img from '../assets/bg-jumbo.jpg';
-import icon from '../assets/icon1.png';
-import icon1 from '../assets/icon3.png';
-import icon2 from '../assets/icon2.png';
+import React from "react";
+import Hero from "../assets/hero.jpg";
+import Asset01 from "../assets/asset_01.jpg";
+import Asset02 from "../assets/asset_02.jpg";
 
-const Styles = Styled(Container)`
-    padding: 0;
-    height: 100%;
+const Landing = () => (
+  <>
+    <div className=" relative flex m-0 p-0 flex-col">
+      <div className="max-w-full flex flex-col-reverse items-center sm:flex sm:flex-row bg-white-50 sm:justify-around sm:items-center">
+        <span className="max-w-full flex flex-col p-4 items-center sm:pl-6 sm:w-1/3 sm:flex sm:flex-col sm:items-center">
+          <pre className="sm:mb-4 mb-1 text-purple-900 m-0 p-0 font-mono font-bold text-xl sm:text-3xl whitespace-pre-wrap italic">
+            Digitize Your Learning Experience
+          </pre>
+          <div className="sm:mb-4 mb-1 text-purple-500 m-0 p-0 font-serif italic font-light text-xl">
+            Join us today
+          </div>
+          <div className="dark-btn font-bold text-center w-32">Sign Up</div>
+        </span>
+        <span className="sm:w-2/3 sm:pr-6 p-2 rounded-sm">
+          <img className="max-h-full" src={Hero} alt="hero.jpg" />
+        </span>
+      </div>
+      <div className="min-w-full flex flex-col items-center sm:min-w-full sm:m-0 sm:p-0 sm:flex sm:flex-row sm:justify-around">
+        <span className="w-auto p-4 sm:w-7/12 sm:h-72 sm:m-0 sm:p-4">
+          <img
+            className="max-w-full max-h-full m-auto p-0"
+            src={Asset02}
+            alt="asset02.jpg"
+          />
+        </span>
+        <span className="w-auto p-6 flex flex-col items-center justify-center sm:w-5/12 sm:pl-6">
+          <div className="italic text-purple-900 font-serif font-bold text-3xl">
+            Extensive Library
+          </div>
+          <pre className="pt-3 text-center text-purple-500 font-sans font-light text-xl whitespace-pre-wrap">
+            You no longer need to search for materials for your course work get
+            all the materials, past questions, solutions and excerpts you need
+            all in one place
+          </pre>
+        </span>
+      </div>
+      <div className="min-w-full flex flex-col items-center sm:min-w-full sm:m-0 sm:p-0 sm:flex sm:flex-row-reverse sm:justify-around">
+        <span className="w-auto p-4 bg-indigo-100 sm:w-7/12 sm:h-72 sm:m-0 rounded-t-3xl">
+          <img
+            className="max-w-full max-h-full m-auto p-0"
+            src={Asset01}
+            alt="asset01.jpg"
+          />
+        </span>
+        <span className="w-auto p-6 flex flex-col items-center justify-center sm:w-5/12 sm:pl-6">
+          <div className="italic text-purple-900 font-serif font-bold text-3xl">
+            Easily Accessible
+          </div>
+          <pre className="pt-3 text-center text-purple-500 font-sans font-light text-xl whitespace-pre-wrap">
+            Access your course work anytime and anywhere from the comfort of
+            your home. Read up at your own schedule with all your materials and
+            past questions with solutions are right on your device
+          </pre>
+        </span>
+      </div>
+    </div>
+  </>
+);
 
-    .jumbotron {
-        padding: 0;
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        grid-template-rows: repeat(4, 1fr);
-        grid-template-areas:
-        '. . . . .'
-        '. h1 h1 . .'
-        'h5 h5 h5 h5 h5'
-        '. . . . .'
-        '. . . . .';
-    }
-
-    .jumbotron h1 {
-        grid-area: h1;
-        margin: 0;
-        justify-self: center;
-    }
-
-    .jumbotron h5 {
-        grid-area: h5;
-        margin: 0;
-        justify-self: center;
-    }
-
-    .jumbotron-fluid {
-        position: relative;
-        color: white;
-        height: 300px;
-        background-image: url(${img});
-        background-size: cover;
-        background-position: top left, bottom right;
-        padding: 5px;
-    }
-
-    .jumbotron .tint {
-        position: absolute;
-        top: 0;
-        left: 0;
-        background-color: purple;
-        z-index: 3;
-        height: 100%;
-        width: 100%;
-        opacity: 0.2;
-    }
-
-    .cards {
-        display: grid;
-        grid-template-columns: repeat(12, 1fr);
-        grid-auto-rows: minmax(350px, auto);
-        gap: 20px;
-        justify-items: center;
-    }
-
-    .conv {
-        grid-column: 1/5;
-    }
-
-    .eff {
-        grid-column: 5/9;
-    }
-
-    .supp {
-        grid-column: 9/13;
-    }
-
-    .cards .card {
-        max-width: 300px;
-        box-shadow: 3px 3px 2px #696969;
-    }
-
-    .cards .card .card-img {
-        border: 1px solid transparent;
-        border-radius: 10%;
-        width: 25%;
-        height: 25%;
-        display: block;
-        margin: 20px auto;
-    }
-
-    .cards .card h5 {
-        margin: 0;
-        text-align: center;
-        font-weight: 700;
-    }
-
-    .cards .card .card-body {
-        text-align: center;
-        padding: 10px;
-    }
-
-   
-
-    @media screen and (max-width: 750px) {
-        .conv {
-            grid-column: 1/13;
-            grid-row: 1/2;
-            justify-self: center;
-        }
-    
-        .eff {
-            grid-column: 1/13;
-            grid-row: 2/3;
-            justify-self: center;
-        }
-    
-        .supp {
-            grid-column: 1/13;
-            grid-row: 3/4;
-            justify-self: center;
-        }        
-    }
-`;
-
-const Home = () => {
-    return (
-        <Styles fluid>
-            <Jumbo fluid>
-                <div className="tint"></div>
-                <h1>Estudiar</h1>
-                <h5>Your Online Library For Good Grades</h5>
-            </Jumbo>
-            <div className="cards mb-4 p-2">
-                <Card className="conv">
-                    <Card.Img src={icon}/>
-                    <h5>Convenient</h5>
-                    <Card.Body>
-                        Simple and Convenient you have all
-                        required materials in a single place,
-                        just log into your account and access them
-                        at your own pace.
-                    </Card.Body>
-                </Card>
-                <Card className="eff">
-                    <Card.Img src={icon1}/>
-                    <h5>Efficient</h5>
-                    <Card.Body>
-                        It's highly efficient in terms of time,
-                        rather than every semester looking for materials
-                        for the year, 
-                        you save the time searching for materials. 
-                    </Card.Body>
-                </Card>
-                <Card className="supp">
-                    <Card.Img src={icon2}/>
-                    <h5>24/7 Support</h5>
-                    <Card.Body>
-                        Estudiar is made by students for students,
-                        any problems regarding materials, solutions
-                        to questions and issues with the site, when reported,
-                        wll be addressed.
-                    </Card.Body>
-                </Card>
-            </div>
-        </Styles>
-    );
-}
-
-export default Home;
+export default Landing;
