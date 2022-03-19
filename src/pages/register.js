@@ -11,7 +11,7 @@ import {
 } from "../util/gen-util";
 import { emailSanitization, passwordSanitization } from "../util/sanitize-util";
 import { checkServerErrorType } from "../util/err-util";
-import brandImg from "../assets/logo.png";
+import brandImg from "../assets/elogo.png";
 
 const Reducer = (state, action) => {
   switch (action.type) {
@@ -181,7 +181,7 @@ const Register = () => {
 
   return (
     <div className="mb-3 min-h-full flex flex-col items-center justify-center">
-      <div className="mb-3">
+      <div className="mb-3 w-14 h-14">
         <img src={brandImg} alt="logo.jpg" />
       </div>
       <div className="auth-card">

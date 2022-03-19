@@ -77,11 +77,11 @@ code {
 }
 
 .s-nav-link-dark {
-  @apply sm:w-14 w-20 mx-1 my-2 text-purple-600 cursor-pointer border-transparent border-b-2 border-yellow-500 text-purple-400 sm:mx-3
+  @apply sm:w-auto w-20 mx-1 my-2 text-purple-600 cursor-pointer border-transparent border-b-2 border-yellow-500 text-purple-400 sm:mx-3
 }
 
 .nav-link-light {
-  @apply sm:w-14 w-20 mx-1 my-2 text-gray-600 cursor-pointer border-transparent border-b-2 hover:border-yellow-500 hover:text-gray-400 sm:mx-3
+  @apply sm:w-auto w-20 mx-1 my-2 text-gray-600 cursor-pointer border-transparent border-b-2 hover:border-yellow-500 hover:text-gray-400 sm:mx-3
 }
 
 .s-nav-link-light {

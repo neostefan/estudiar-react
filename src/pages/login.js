@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import { GrClose } from "react-icons/gr";
 
 import axios from "../axios-inst";
-import brandImg from "../assets/logo.png";
+import brandImg from "../assets/elogo.png";
 import authContext from "../context/auth-context";
 import { emailSanitization, passwordSanitization } from "../util/sanitize-util";
 import { checkErrorItem } from "../util/gen-util";
@@ -146,7 +146,7 @@ const LogIn = () => {
 
   return (
     <div className="center-page-col">
-      <div className="mb-3">
+      <div className="mb-3 w-14 h-14">
         <img src={brandImg} alt="logo.jpg" />
       </div>
       <div className="auth-card">

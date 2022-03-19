@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useHistory } from "react-router-dom";
 
 import authContext from "../context/auth-context";
 import brandImg from "../assets/logo.png";
@@ -7,11 +7,13 @@ import brandImg from "../assets/logo.png";
 const Navigation = () => {
   let { auth, setAuth } = React.useContext(authContext);
   let { pathname } = useLocation();
+  let history = useHistory();
 
   let LogOut = () => {
     localStorage.removeItem("expires");
     localStorage.removeItem("token");
     console.log(auth);
+    history.push("/");
     setAuth(false);
   };
 
