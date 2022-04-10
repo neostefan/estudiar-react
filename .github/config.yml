@@ -21,7 +21,7 @@
 #     jobs:
 #       - build
 
-name: CI/CD
+name: CI/CD github pages
 
 on:
   push:
