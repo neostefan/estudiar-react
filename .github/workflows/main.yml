@@ -1,24 +1,24 @@
-name: Estudiar React Workflow
+name: CI/CD
 
 on:
   push:
     branches:
       - master
   pull_request:
-    branches: 
+    branches:
       - master
 
 jobs:
+  runs-on: ubuntu-latest
   deploy:
-    runs-on: ubuntu-latest
     steps:
-      - name: checkout and deploy to github pages
-      - uses: actions/checkout@v2
+      - name: checkout from the repository
+      - uses: actions/checkout@v3
+
+      - name: setup node and deploy to github pages
       - uses: actions/setup-node@v2
         with:
           node-version: '16'
       - run: npm install
       - run: npm run predeploy
       - run: npm run deploy
-
-
