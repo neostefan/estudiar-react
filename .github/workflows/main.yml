@@ -22,7 +22,7 @@ jobs:
       - name: installing dependencies and pushing to github pages
         run: |
           npm install
-          git config --global user.email stephen.adingupu@gmail.com
-          git config --global user.name stephen
+          git config --global user.email 'stephen.adingupu@gmail.com'
+          git config --global user.name 'stephen'
           npm run predeploy
           npm run deploy

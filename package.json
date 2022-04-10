@@ -2,7 +2,7 @@
   "name": "estudiar",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://neostefan.github.io/estudiar-react",
+  "homepage": "https://neostefan.github.io/estudiar-react/",
   "dependencies": {
     "@craco/craco": "^6.4.3",
     "@testing-library/jest-dom": "^5.11.6",
