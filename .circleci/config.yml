@@ -1,0 +1,17 @@
+version: '2.1'
+jobs:
+  build:
+    working_directory: ~/estudiar-web
+    docker:
+      - image: 'cimg/node:16.14.2'
+    steps:
+      - checkout
+      - run:
+          command: |
+            npm install
+            npm run predeploy
+            npm run deploy
+workflows:
+  build-deploy-ghpages:
+    jobs:
+      - build
