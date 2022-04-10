@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/estudiar-react/static/css/main.70c1892c.chunk.css",
+    "main.js": "/estudiar-react/static/js/main.a0f0809e.chunk.js",
+    "main.js.map": "/estudiar-react/static/js/main.a0f0809e.chunk.js.map",
+    "runtime-main.js": "/estudiar-react/static/js/runtime-main.26564cd7.js",
+    "runtime-main.js.map": "/estudiar-react/static/js/runtime-main.26564cd7.js.map",
+    "static/js/2.db804b4e.chunk.js": "/estudiar-react/static/js/2.db804b4e.chunk.js",
+    "static/js/2.db804b4e.chunk.js.map": "/estudiar-react/static/js/2.db804b4e.chunk.js.map",
+    "static/js/3.52b3686d.chunk.js": "/estudiar-react/static/js/3.52b3686d.chunk.js",
+    "static/js/3.52b3686d.chunk.js.map": "/estudiar-react/static/js/3.52b3686d.chunk.js.map",
+    "index.html": "/estudiar-react/index.html",
+    "static/css/main.70c1892c.chunk.css.map": "/estudiar-react/static/css/main.70c1892c.chunk.css.map",
+    "static/js/2.db804b4e.chunk.js.LICENSE.txt": "/estudiar-react/static/js/2.db804b4e.chunk.js.LICENSE.txt",
+    "static/media/asset_01.4714b25c.jpg": "/estudiar-react/static/media/asset_01.4714b25c.jpg",
+    "static/media/asset_02.b37a822c.jpg": "/estudiar-react/static/media/asset_02.b37a822c.jpg",
+    "static/media/elogo.38675c1c.png": "/estudiar-react/static/media/elogo.38675c1c.png",
+    "static/media/hero.fcd2c7cc.jpg": "/estudiar-react/static/media/hero.fcd2c7cc.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.26564cd7.js",
+    "static/js/2.db804b4e.chunk.js",
+    "static/css/main.70c1892c.chunk.css",
+    "static/js/main.a0f0809e.chunk.js"
+  ]
+}
