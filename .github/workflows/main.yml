@@ -1,5 +1,4 @@
 name: CI/CD github pages
-
 on:
   push:
     branches:
@@ -7,10 +6,9 @@ on:
   pull_request:
     branches:
       - master
-
 jobs:
-  runs-on: ubuntu-latest
   build:
+    runs-on: ubuntu-latest
     steps:
       - name: checkout repository
       - uses: actions/checkout@v3
