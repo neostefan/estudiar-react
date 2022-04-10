@@ -6,6 +6,9 @@ jobs:
       - image: 'cimg/node:16.14.2'
     steps:
       - checkout
+      - add_ssh_keys:
+          fingerprints:
+            - "59:44:d2:9c:96:ca:37:81:1f:f7:3b:f8:09:b0:19:a3"
       - run:
           command: |
             npm install
