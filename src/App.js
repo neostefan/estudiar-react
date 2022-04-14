@@ -29,16 +29,16 @@ function App() {
         <Router>
           <Navigation />
           <Switch>
-            <Route path="/login">
+            {/* <Route path="/login">
               <LogIn />
             </Route>
             <Route path="/register">
               <Register />
-            </Route>
-            <Route path="/d">
+            </Route> */}
+            {/* <Route path="/d">
               <DashBoard />
-            </Route>
-            <Route path="/" exact>
+            </Route> */}
+            <Route path="/">
               <Landing />
             </Route>
           </Switch>

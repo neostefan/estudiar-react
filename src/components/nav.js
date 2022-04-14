@@ -44,7 +44,7 @@ const Navigation = () => {
         <img src={brandImg} className="m-1 w-48 sm:w-auto" alt="logo.png" />
       </Link>
       <span className="sm:flex-auto" />
-      <div
+      {/* <div
         className={
           pathname === "/register"
             ? "s-nav-link-dark sm:dark-btn"
@@ -61,7 +61,7 @@ const Navigation = () => {
         }
       >
         <Link to="/login">Log In</Link>
-      </div>
+      </div> */}
     </div>
   );
 };
