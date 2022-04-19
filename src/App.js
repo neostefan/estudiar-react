@@ -9,9 +9,6 @@ import Footer from "./components/footer";
 import Navigation from "./components/nav";
 
 import Landing from "./pages/home";
-import LogIn from "./pages/login";
-import Register from "./pages/register";
-import DashBoard from "./pages/dashboard";
 
 function App() {
   let [auth, setAuth] = React.useState(false);
