@@ -9,6 +9,7 @@ import Footer from "./components/footer";
 import Navigation from "./components/nav";
 
 import Landing from "./pages/home";
+import Privacy from "./pages/privacy";
 
 function App() {
   let [auth, setAuth] = React.useState(false);
@@ -35,7 +36,10 @@ function App() {
             {/* <Route path="/d">
               <DashBoard />
             </Route> */}
-            <Route path="/">
+            <Route path="/estudiar-react/privacy-policy">
+              <Privacy />
+            </Route>
+            <Route path="/estudiar-react/">
               <Landing />
             </Route>
           </Switch>

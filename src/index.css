@@ -27,6 +27,18 @@ code {
     monospace;
 }
 
+.main {
+  @apply flex flex-col p-10 w-full
+}
+
+.header {
+  @apply text-purple-500 font-bold py-2 text-xl
+}
+
+.s-header {
+  @apply text-purple-500 font-light py-2
+}
+
 .center-page-col {
   min-height: 500px;
   @apply flex flex-col items-center justify-center;

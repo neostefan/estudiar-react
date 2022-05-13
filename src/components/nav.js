@@ -40,7 +40,7 @@ const Navigation = () => {
 
   return (
     <div className="p-1 m-0 bg-white-50 font-bold flex flex-col sm:flex sm:flex-row sm:items-center">
-      <Link to="/">
+      <Link to="/estudiar-react/">
         <img src={brandImg} className="m-1 w-48 sm:w-auto" alt="logo.png" />
       </Link>
       <span className="sm:flex-auto" />
